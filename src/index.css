@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+body{
+  background-color: #ebeef3;
+}
+
+@layer base{
+    .active_btn{
+      @apply border border-lime-400 p-2 px-4 rounded-sm
+    }
+}
