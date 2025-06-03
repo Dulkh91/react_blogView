@@ -29,11 +29,11 @@ const Login = () => {
             <h2 className="mb-5 text-center font-bold">Sign In</h2>
             <div>
                 <label htmlFor="email" className="block mb-1 text-sm">Email address </label>
-                <input type="email" name="email" placeholder="Email address" className="border border-gray-300 p-1 rounded-sm w-full text-sm"/>
+                <input type="email" name="email" placeholder="Email address" className="border border-gray-300 p-2 rounded-sm w-full text-sm"/>
             </div>
             <div>
                 <label htmlFor="name" className="block mb-1 text-sm">Password</label>
-                <input type="password" name="password" placeholder="password" className="border border-gray-300 p-1 rounded-sm w-full text-sm"/>
+                <input type="password" name="password" placeholder="password" className="border border-gray-300 p-2 rounded-sm w-full text-sm"/>
             </div>
 
                 {errors && (<label className="text-xs text-red-600 flex justify-center">{errors}</label>)}

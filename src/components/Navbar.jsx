@@ -10,7 +10,7 @@ const Navbar = () =>{
     }
 
     return (
-        <nav className="bg-white p-3 text-lg flex justify-between items-center">
+        <nav className="bg-white p-4 text-lg flex justify-between items-center">
             <Link to="/"><h1>Realworld blog</h1></Link>
             <div >
                 {isLoging?(<div className="flex items-center gap-5">
@@ -31,8 +31,8 @@ const Navbar = () =>{
                         Log Out
                     </button>
                 </div>) : (<div>
-                <Link  to='/login'> <button className={`mx-2 a ${path.pathname==='/login'? 'active_btn':''}`}  >Sing in</button></Link>
-                <Link  to="/sign_up"> <button className={`mx-2 a ${path.pathname==='/sign_up'? 'active_btn':''}`} >Sing up</button></Link>
+                <Link  to='/login'> <button className={`mx-2 ${path.pathname==='/login'? 'active_btn':''}`}  >Sign in</button></Link>
+                <Link  to="/sign_up"> <button className={`mx-2  ${path.pathname==='/sign_up'? 'active_btn':''}`} >Sign up</button></Link>
                 </div>)}
 
             </div>

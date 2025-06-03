@@ -14,7 +14,9 @@ const Home = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get("page") || "1");
 
-   const itemsPerPage = 10;
+   const itemsPerPage = 5;
+
+  console.log(data)
 
    if(loading) return <div className="flex justify-center">Loading....</div>;
    if(error) return <div className="flex justify-center">{error.message}</div>;

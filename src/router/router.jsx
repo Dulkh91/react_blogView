@@ -6,16 +6,13 @@ import Login from '../pages/SignIn'
 import Article from '../pages/Article'
 import NewArticle from '../pages/NewArticle'
 
-import {CreateUserAction } from './actions'
-
-
 const router = createBrowserRouter([
     {path: '/',
     element: <Layout/>,
     children:[
         {path:'', element:<Home/>},
         {path:'articles', element:<Home/>},
-        {path:'sign_up', element: <NewAccount/>, action: CreateUserAction},
+        {path:'sign_up', element: <NewAccount/>,},
         {path:'login', element: <Login/>},
         {path:'articles/:slug', element:<Article/>},
         {path:'create_article', element: <NewArticle/>}

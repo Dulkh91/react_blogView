@@ -1,6 +1,7 @@
 import {useState, useEffect } from "react";
 
-const API_URL = 'https://realworld.habsidev.com/api';
+// const API_URL = 'https://realworld.habsidev.com/api';
+const API_URL = import.meta.env.VITE_API_URL
 
 const useAuth = ()=>{
     const [user, setUser] = useState(null)
@@ -8,6 +9,7 @@ const useAuth = ()=>{
 
     const [isLoging, setIsLoging] = useState(false)
     const [errors, setErrors] = useState(null)
+
 
     // Check user by token
     useEffect(()=>{
@@ -86,7 +88,36 @@ const useAuth = ()=>{
         setErrors(null);
     }
 
-    return {login,isLoging, logout,user, loading, errors}
+
+    // នេះមេរៀនអំពីចុះអ្នកប្រើប្រាស់ ដែលយើងត្រូវបានសិក្សាមកតាមក្រោយ
+    const registerUser = async (userData)=>{
+
+            try {
+                const response = await fetch(`${API_URL}/users`,{
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify({user: userData})
+                })
+
+                const data = await response.json()
+
+                if(!response.ok) throw new Error('Registration failed')
+
+                //save data
+                localStorage.setItem('authToken',data.user.token)
+                setUser(data.user)
+                setIsLoging(true)
+                return data.user
+
+            } catch (error) {
+                setErrors(error.message)
+                throw error
+            }
+
+    }
+
+
+    return {login,isLoging, logout,user, loading, errors, registerUser}
 
 
 }
