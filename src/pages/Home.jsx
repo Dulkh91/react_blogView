@@ -6,8 +6,10 @@ import Pagination from "../components/Pagination";
 import { useLogin } from "../hooks/useFetch";
 
 const Home = () => {
+  
+    const API_URL = `${import.meta.env.VITE_API_URL}/articles`
 
-   const{data,loading,error} = useLogin('https://realworld.habsidev.com/api/articles')
+   const{data,loading,error} = useLogin(API_URL)
   
   //  const [currentPage, setCurrentPage] = useState(1);
 
@@ -16,7 +18,7 @@ const Home = () => {
 
    const itemsPerPage = 5;
 
-  console.log(data)
+
 
    if(loading) return <div className="flex justify-center">Loading....</div>;
    if(error) return <div className="flex justify-center">{error.message}</div>;

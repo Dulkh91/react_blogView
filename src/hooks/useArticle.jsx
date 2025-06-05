@@ -28,7 +28,32 @@ const useArticle =()=>{
         }
     }
 
-    return {createArticle, errors}
+
+    // Updata Article
+    const updateArticle = async(slug, article, token)=>{
+        try {
+            const response = await fetch(`${API_URL}/articles/${slug}`,{
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Token ${token}`
+            },
+            body: JSON.stringify({article})
+
+        })
+        
+        if(!response.ok) throw new Error("Update failed")
+        const data = await response.json()
+        return data.article
+
+        } catch (error) {
+            setErrors(error.message)
+            throw error
+        }
+
+    }
+
+    return {createArticle, errors, updateArticle}
 }
 
 export default useArticle

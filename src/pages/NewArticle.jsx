@@ -2,12 +2,18 @@
 import useArticle from "../hooks/useArticle";
 import { useAuthContext } from "../context/AuthContext";
 import {useForm, useFieldArray} from 'react-hook-form'
-
+import { useParams,useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 const NewArticle = () => {
-  const { createArticle, errors } = useArticle();
+  const navi = useNavigate()
+  const { createArticle, errors,updateArticle } = useArticle();
+  const {slug} = useParams()// Get slug for edit article
+
+    const isEdit = Boolean(slug)
     const {user} = useAuthContext()
-    const {register,handleSubmit,formState:{error}, control} = useForm({
+
+    const {register,handleSubmit, control,setValue} = useForm({
         defaultValues:{
             article:{
             title: '',
@@ -21,19 +27,44 @@ const NewArticle = () => {
 
     const {fields,append, remove}  = useFieldArray({control,name: "article.tagList"})
 
+
+    useEffect(()=>{
+      const API_ULR = import.meta.env.VITE_API_URL
+      // បញ្ចូល value ទៅកាន់ input form
+      if(isEdit){
+        fetch(`${API_ULR}/articles/${slug}`)
+        .then(res=> res.json())
+        .then(data=>{
+          setValue('article.title',data.article.title)
+          setValue('article.description', data.article.description)
+          setValue('article.body', data.article.body)
+          setValue('article.tagList',data.article.tagList)
+        } 
+        )
+      }
+    },[slug,setValue])
+
+
     const onSubmit = async (data)=>{
-        
+        let result
         try {
-           const result =  await createArticle(data.article, user?.token)
-           console.log("Sucess :" , result)
+           if(isEdit){
+           
+            result = await updateArticle(slug,data.article, user?.token)
+           }else{
+            result =  await createArticle(data.article, user?.token)
+           }
+          navi(`/articles/${result.slug}`)
+          
+          
         } catch (error) {
             alert("Post failed:" + error.message)
         }
-        console.log(data.article)
+        
     }
   return (
     <div className="bg-white mt-5 max-w-3xl mx-auto p-5 rounded-sm shadow-lg space-y-5">
-      <h1 className="text-center">Create new article</h1>
+      <h1 className="text-center">{isEdit?'Edit article':'Create new article'}</h1>
       <form method="post" onSubmit={handleSubmit(onSubmit)}>
 
         {/* Title field */}
@@ -96,7 +127,7 @@ const NewArticle = () => {
                     {(fields.length-1 === index)? 
                     <button 
                     className="border border-blue-400 px-5 text-blue-500 rounded-sm"
-                        onClick={()=>append(" ")}
+                        onClick={()=>append(' ')}
                     >
                         Add tag
                     </button>
@@ -111,7 +142,7 @@ const NewArticle = () => {
       
             
           <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5">
-            Send
+            {isEdit? 'Update': 'Send'}
           </button>
         
       </form>

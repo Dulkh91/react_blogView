@@ -15,7 +15,8 @@ const router = createBrowserRouter([
         {path:'sign_up', element: <NewAccount/>,},
         {path:'login', element: <Login/>},
         {path:'articles/:slug', element:<Article/>},
-        {path:'create_article', element: <NewArticle/>}
+        {path:'create_article', element: <NewArticle/>},
+        {path: 'create_article/:slug/edit', element:<NewArticle/>}
     ]
     }
     

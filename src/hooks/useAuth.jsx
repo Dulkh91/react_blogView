@@ -62,8 +62,6 @@ const useAuth = ()=>{
 
             const data = await response.json()
 
-            console.log(response.status)
-
             if (!response.ok) throw new Error("Email and Password failed login");
 
             
