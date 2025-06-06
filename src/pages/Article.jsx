@@ -4,6 +4,7 @@ import Header from "../components/card/Header"
 import Profile from "../components/card/Profile"
 import TagList from '../components/card/TagList'
 import { useAuthContext } from '../context/AuthContext'
+import DeleteBtn from '../components/DeleteBtn'
 
 const Article = ()=>{
     const {isLoging} = useAuthContext()
@@ -33,14 +34,16 @@ const Article = ()=>{
             <Profile dataProfile={data.article}/>
 
             {isLoging &&(
-                <div className=" space-x-2 mt-5 text-sm">
-                <button className="border border-red-500 text-red-500 rounded-sm px-2 ">Delete</button>
-
+            <div className=" space-x-3 mt-5 text-sm flex justify-end">
+                
+                {/* Delete article */}
+                    <DeleteBtn/>
                 {/* Edit data by slud  */}
-                <Link to={`/create_article/${data.article.slug}/edit`}><button className="border border-lime-500 text-lime-500 rounded-sm px-2">Edit</button> </Link>
+                <div>
+                    <Link to={`/create_article/${data.article.slug}/edit`}><button className="border border-lime-500 text-lime-500 rounded-sm px-4 p-1">Edit</button> </Link>
+                </div>
                 
                  
-
             </div>
             )}
 

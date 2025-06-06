@@ -27,7 +27,7 @@ const NewArticle = () => {
 
     const {fields,append, remove}  = useFieldArray({control,name: "article.tagList"})
 
-
+    // fetch data for reuse in form
     useEffect(()=>{
       const API_ULR = import.meta.env.VITE_API_URL
       // បញ្ចូល value ទៅកាន់ input form

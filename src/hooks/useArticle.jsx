@@ -53,7 +53,34 @@ const useArticle =()=>{
 
     }
 
-    return {createArticle, errors, updateArticle}
+    // Delete article by slug
+    const deleteArticle = async(slug, token) =>{
+        try {
+            const response = await fetch(`${API_URL}/articles/${slug}`,{
+                method: 'DELETE',
+                headers: {
+                    // 'Content-Type': 'application/json',
+                    'Authorization': `${token}`}
+            })
+            if(!response.ok) throw new Error("Deteting is failed")
+                
+            // const contentType = response.headers.get('Content-Type'); // null
+
+            // if (contentType && contentType.includes('application/json')) {
+            // const data = await response.json();
+            // return data;
+            // } else {
+            // return null; // ✅ No JSON body to parse
+            // }
+
+        } catch (error) {
+            setErrors(error.message)
+            throw error
+        }
+
+    }
+
+    return {createArticle, errors, updateArticle,deleteArticle}
 }
 
 export default useArticle
