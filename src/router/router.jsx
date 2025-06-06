@@ -5,7 +5,7 @@ import NewAccount from '../pages/NewAccount'
 import Login from '../pages/SignIn'
 import Article from '../pages/Article'
 import NewArticle from '../pages/NewArticle'
-
+import EditProfile from '../pages/EditProfile'
 const router = createBrowserRouter([
     {path: '/',
     element: <Layout/>,
@@ -16,7 +16,9 @@ const router = createBrowserRouter([
         {path:'login', element: <Login/>},
         {path:'articles/:slug', element:<Article/>},
         {path:'create_article', element: <NewArticle/>},
-        {path: 'create_article/:slug/edit', element:<NewArticle/>}
+        {path: 'create_article/:slug/edit', element:<NewArticle/>},
+        {path: 'edit_profile', element:<EditProfile/>}
+
     ]
     }
     

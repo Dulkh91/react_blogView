@@ -1,6 +1,7 @@
 import { Link,useLocation } from "react-router-dom"
 import { useAuthContext } from "../context/AuthContext"
 import imageDefault from '../assets/imageDefault.png'
+import UserImage from "./UserImage"
 const Navbar = () =>{
     const {isLoging, logout,user} = useAuthContext()
     const path = useLocation()
@@ -8,6 +9,7 @@ const Navbar = () =>{
     const handleLogout = ()=>{
        logout()
     }
+
 
     return (
         <nav className="bg-white p-4 text-lg flex justify-between items-center">
@@ -18,12 +20,10 @@ const Navbar = () =>{
                         className="text-sm text-lime-500 rounded-sm p-1 hover:border hover:border-lime-500 ">
                         Create article
                     </Link>
-
-                    <label htmlFor="nameuser">{user.username}</label>
-
-                    <img src={(user.image || imageDefault)} alt="profile"
-                     className="w-10"
-                     />
+                    
+                    {/* Image and name user */}
+                    <UserImage user={user}/>
+                    
 
                     <button className="p-2 px-4 rounded-sm hover:border hover:border-gray-300"
                        onClick={handleLogout}
