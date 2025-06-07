@@ -35,6 +35,7 @@ export default [
       ...pluginReactHooks.configs.recommended.rules, // Spread React Hooks recommended rules
       "react/react-in-jsx-scope": "off", // Disable this rule for React 19
       "react/prop-types": "off", // Optional: Disable prop-types if you don't use it
+      "no-unused-vars" : "warm"
     },
   },
 ];
