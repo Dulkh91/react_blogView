@@ -39,12 +39,18 @@ const UserImage = ({user}) => {
         <span className='username'> {user.username}</span>
                     <div className="inline-block relative items-center">
                         <img src={(user.image || imageDefault)} alt="profile"
-                            className="w-10 h-10 rounded-full"
+                            className="w-10 h-10 rounded-full cursor-pointer"
                            onClick={()=>setIsOpen(true) }
                         />
                         {isOpen &&(
-                            <div className="absolute bg-white shadow-lg p-3 rounded-sm top-12 right-0 transition-all duration-500 ease-in-out" ref={modalRef}>
-                                <span className="text-xs block text-gray-400"> {user.email}</span>
+                            <div className="absolute bg-white shadow-lgrounded-sm top-12 right-0 z-10 transition-all duration-500 ease-in-out" ref={modalRef}>
+                                <div className='group hover:bg-gray-200 p-2 flex items-center '>
+                                    <span className="text-xs block text-gray-400 mx-2 group-hover:text-black"> {user.bio}</span>
+                                </div>
+                                 <div className='group hover:bg-gray-200 p-2 flex items-center'>
+                                    <span className="text-xs block text-gray-400 mx-2 group-hover:text-black"> {user.email}</span>
+                                </div>
+                                
                                 <Link to={`/edit_profile`}>
                                     <button className=" bg-blue-500 text-white text-center text-sm rounded-sm w-full mt-3 p-1"
                                         onClick={()=>setIsOpen(false)}

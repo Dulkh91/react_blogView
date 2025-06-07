@@ -1,6 +1,6 @@
 import { useAuthContext } from "../context/AuthContext"
 import { useForm } from "react-hook-form"
-import { useNavigate } from "react-router-dom"
+import { useNavigate, Navigate } from "react-router-dom"
 import { useState,useEffect } from "react"
 
 
@@ -8,15 +8,14 @@ const EditProfile = () => {
 
 const [formErrors, setFormErrors] = useState(null);
     const navi = useNavigate()
-    const {editProfile,user} = useAuthContext()
+    const {editProfile,user, isLoging} = useAuthContext()
     
-
 
     const {register,handleSubmit, formState:{errors}, setValue} = useForm({defaultValues:{
         user:{
             username:'',
+            bio:'',
             email:'',
-            password:'',
             image: ''
         }
     }})
@@ -24,9 +23,9 @@ const [formErrors, setFormErrors] = useState(null);
 
     useEffect(()=>{
         if(user){
+            setValue('user.bio', user.bio)
             setValue('user.username', user.username)
             setValue('user.email', user.email)
-
             setValue('user.image', user.image)
         }
         
@@ -44,17 +43,39 @@ const [formErrors, setFormErrors] = useState(null);
         
     }
 
-
+// Handle page edit profile withou login
+if(!isLoging) return <Navigate to={`/login`} replace/>
 
     return ( <div className="bg-white mt-5 max-w-md mx-auto p-5 shadow-lg rounded-sm">
          <form method="post" onSubmit={handleSubmit(onSubmit)}>
             <h2 className="mb-5 text-center font-bold">Edit Profile</h2>
+             {/* user name */}
+            <div className="mb-5">
+                <label htmlFor="bio" className="block mb-1 text-sm">Username</label>
+                <input type="text" name="bio" placeholder="bio" 
+                className={`border border-gray-300 p-2 rounded-sm w-full text-sx ${(errors?.user?.bio)? 'valid_input': ''}`} autoFocus
+                    {...register('user.bio',
+                        {required: 'The bio is required',
+                             minLength: {
+                                value: 3,
+                                message: 'Minimum 3 characters'
+                             }, 
+                             maxLength: {
+                                value: 20,
+                                message: 'Maximum 20 characters'
+                             }
+                            })}
+                />
+                      {/* សិក្សាលក្ខណ username*/}
+                {errors?.user?.username && (<label className="text-red-500 text-xs">{errors.user.username.message}</label>)}
+
+            </div>
 
             {/* user name */}
             <div className="mb-5">
                 <label htmlFor="name" className="block mb-1 text-sm">Username</label>
                 <input type="text" name="name" placeholder="Username" 
-                className={`border border-gray-300 p-2 rounded-sm w-full text-sx ${(errors?.user?.username)? 'valid_input': ''}`} autoFocus
+                className={`border border-gray-300 p-2 rounded-sm w-full text-sx ${(errors?.user?.username)? 'valid_input': ''}`}
                     {...register('user.username',
                         {required: 'user name is required',
                              minLength: {
@@ -89,26 +110,7 @@ const [formErrors, setFormErrors] = useState(null);
                 {/* សិក្សាលក្ខណ Email*/}
                 {errors?.user?.email && (<label className="text-red-500 text-xs">{errors.user.email.message}</label>)}
             </div>
-
-            {/* Password */}
-            <div className="mb-5">
-                <label htmlFor="password" className="block mb-1 text-sm">New Password</label>
-                <input type="password" name="password" placeholder="New password" 
-                className={`border border-gray-300 p-2 rounded-sm w-full text-sm ${(errors?.user?.password)? 'valid_input': ''}`}
-                    {...register('user.password',{
-                        required: 'Password is required',
-                        validate: (value)=>{if(value.length <6 || value.length > 40){
-                            return 'Password must be between 6 and 40 characters';
-                            }
-                            return true
-                        }
-                        
-                    })}
-                />
-
-                {/* សិក្សាលក្ខណ Password*/}
-                { errors?.user?.password && (<label className="text-red-500 text-xs">{errors.user.password.message}</label>)}
-            </div>
+            
 
             {/* Avatar Image */}
             <div className="mb-5">
@@ -123,6 +125,7 @@ const [formErrors, setFormErrors] = useState(null);
                                 },
                     })}
                 />
+
                {errors.user?.image && (<span className="text-red-500 text-xs">{errors.user?.image?.message}</span>)}
             </div>
             

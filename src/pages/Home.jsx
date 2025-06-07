@@ -5,6 +5,7 @@ import Pagination from "../components/Pagination";
 
 import { useLogin } from "../hooks/useFetch";
 
+
 const Home = () => {
   
     const API_URL = `${import.meta.env.VITE_API_URL}/articles`
@@ -31,9 +32,11 @@ const Home = () => {
   const handleCurrentPage = (page)=>{
        setSearchParams({page})
   } 
-   
+  
+  
   return (
     <div className="min-h-screen flex flex-col ">
+
       <main className=" flex-1">
         {
           currentItems && currentItems.map(article=><Card key={article.title} data={article} />)

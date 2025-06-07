@@ -31,8 +31,21 @@ const Navbar = () =>{
                         Log Out
                     </button>
                 </div>) : (<div>
-                <Link  to='/login'> <button className={`mx-2 ${path.pathname==='/login'? 'active_btn':''}`}  >Sign in</button></Link>
-                <Link  to="/sign_up"> <button className={`mx-2  ${path.pathname==='/sign_up'? 'active_btn':''}`} >Sign up</button></Link>
+                <Link  to='/login'> 
+                    <button 
+                        className={`mx-2 p-1 px-2 rounded-sm hover:border hover:border-gray-300 ${path.pathname==='/login'? 'active_btn':''}`}  
+                        >
+                        Sign in
+                    </button>
+                </Link>
+
+                <Link  to="/sign_up"> 
+                    <button 
+                        className={`mx-2 p-1 px-2 rounded-sm hover:border hover:border-gray-300 ${path.pathname==='/sign_up'? 'active_btn':''}`} 
+                        >
+                            Sign up
+                        </button>
+                </Link>
                 </div>)}
 
             </div>

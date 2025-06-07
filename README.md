@@ -13,9 +13,14 @@ npm run dev
 ```
 VITE_API_URL = api_url
 ``` 
-## Image demo 
+## Image feature demo 
 !['viewList'](/src/assets/viewList.png)
 !['postArticle'](/src/assets/postArticle.png)
+!['login'](/src/assets/login.png)
+!['delete'](/src/assets/delete_user.png)
+!['edit_profile'](/src/assets/edit_profile.png)
+!['edit_article'](/src/assets/edit_article.png)
+
 
 ## Dependencies
 - react-vite: 19,

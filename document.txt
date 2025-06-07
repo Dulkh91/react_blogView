@@ -1,0 +1,27 @@
+I) ការធ្វើ Auth ដើម្បីឆែកថាបាន login ឬក៏បាន sign up ដោយមាន method ដូចជា
+១​  checkAuth : ដើម្បីឆែក token ពីកុំព្យូទ័ររបស់យើងជាមួយ API ដូចគ្នាដែរឬទេ?
+    - ប្រសិនដូចវាដំណើរ fetch api
+
+២ login : យើងសិក្សាអំពីឆែក token រួចដោយដឹងថាវាអត់ដូចឬគ្មានដូចនេះទាមទា token ពី api 
+មកដាក់នៅក្នុងកុំព្យូទ័រ ។
+
+៣ logout : 
+
+៤ registerUser :
+
+
+5 editProfile : 
+
+II) useContext វាគឺសម្រាប់គ្រង methods ខាងលើនេះដែលអាចឲ្យបាននៅគ្រប់ pages ទាំងអស់
+
+
+
+
+ការប្រើប្រើ​ Navigate ដើម្បីការពារ page ដោយចូលមិនបានការអនុញ្ញាត:
+- new_article
+- edit_article/{slg}/edit
+- edit_profile
+ 
+Navigate ការពារកុំឲ្យចូលស្ទួន:
+ - Sign in 
+ - Sign up

@@ -31,15 +31,21 @@ const useArticle =()=>{
 
     // Updata Article
     const updateArticle = async(slug, article, token)=>{
+            const cleanArticle = {...article, 
+               tagList: article.tagList.map(tag=>tag.trim()).filter(Boolean)}
+            
+               console.log(cleanArticle)
         try {
+            // console.log(Array.isArray(article.tagList))
+            // console.log(article)
             const response = await fetch(`${API_URL}/articles/${slug}`,{
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Token ${token}`
             },
-            body: JSON.stringify({article})
-
+            body: JSON.stringify({article: cleanArticle})
+        
         })
         
         if(!response.ok) throw new Error("Update failed")

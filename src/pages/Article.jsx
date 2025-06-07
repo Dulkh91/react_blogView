@@ -18,7 +18,7 @@ const Article = ()=>{
      if(loading) return <div className="flex justify-center">Loading....</div>;
 
     //  console.log(data.article.slug)
-
+    // console.log(data.article)
     return (<div className="max-w-4xl mx-auto bg-white mt-5 p-5 rounded-sm shadow-lg space-y-4">
         <section className="flex justify-between gap-4 items-start">
             <main className=" flex-1">
@@ -38,9 +38,10 @@ const Article = ()=>{
                 
                 {/* Delete article */}
                     <DeleteBtn/>
+
                 {/* Edit data by slud  */}
                 <div>
-                    <Link to={`/create_article/${data.article.slug}/edit`}><button className="border border-lime-500 text-lime-500 rounded-sm px-4 p-1">Edit</button> </Link>
+                    <Link to={`/edit_article/${data.article.slug}/edit`}><button className="border border-lime-500 text-lime-500 rounded-sm px-4 p-1">Edit</button> </Link>
                 </div>
                 
                  

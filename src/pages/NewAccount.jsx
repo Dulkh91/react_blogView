@@ -1,10 +1,12 @@
 import { useAuthContext } from "../context/AuthContext"
 import { useForm } from "react-hook-form"
-import { Link,useNavigate } from "react-router-dom"
+import { Link,useNavigate,Navigate } from "react-router-dom"
 import { useState } from "react"
+
 const NewAccount = ()=>{
     const [formErrors, setFormErrors] = useState(null);
     const navi = useNavigate()
+
     const {register,handleSubmit, formState:{errors}, watch} = useForm({defaultValues:{
         user:{
             username:'',
@@ -13,7 +15,9 @@ const NewAccount = ()=>{
         },
         repeadPassword: ''
     }})
-    const {registerUser} = useAuthContext()
+
+
+    const {registerUser, isLoging} = useAuthContext()
 
     const onSubmit = async(data)=>{
         try {
@@ -25,7 +29,8 @@ const NewAccount = ()=>{
         
     }
 
-    
+    if(isLoging) return <Navigate to={`/`} replace />
+
 
     return(
        <div className="bg-white mt-5 max-w-md mx-auto p-5 shadow-lg rounded-sm">

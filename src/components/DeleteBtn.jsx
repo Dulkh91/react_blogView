@@ -33,11 +33,12 @@ const DeleteBtn = () => {
 
         {/* Popover */}
         {eventBtn && (<div 
-        className={`absolute z-20 bg-white shadow-lg rounded-sm p-4 w-60 left-full ml-3 top-0 duration-500 transition-all ease-in-out
+        className={`absolute z-20 bg-white shadow-lg rounded-sm p-4 w-60 md:left-full ml-3 md:top-0 duration-500 transition-all ease-in-out right-0
                 ${eventBtn? ' opacity-100 translate-y-0': 'opacity-0 translate-y-4'}
             `}>
           {/* Arrow */}
-          <span className="absolute -left-2 top-4 w-4 h-4 bg-white rotate-45 shadow-lg z-0 "></span>
+          <span className="absolute md:-left-2 right-4 top-1 w-4 h-4 bg-white rotate-45 md:shadow-lg z-0 "></span>
+          
           {/* Content text */}
           <div className=" relative z-10">
             <div className="flex  ">

@@ -2,7 +2,7 @@
 import useArticle from "../hooks/useArticle";
 import { useAuthContext } from "../context/AuthContext";
 import {useForm, useFieldArray} from 'react-hook-form'
-import { useParams,useNavigate } from "react-router-dom";
+import { useParams,useNavigate,Navigate } from "react-router-dom";
 import { useEffect } from "react";
 
 const NewArticle = () => {
@@ -11,7 +11,7 @@ const NewArticle = () => {
   const {slug} = useParams()// Get slug for edit article
 
     const isEdit = Boolean(slug)
-    const {user} = useAuthContext()
+    const {user,isLoging} = useAuthContext()
 
     const {register,handleSubmit, control,setValue} = useForm({
         defaultValues:{
@@ -19,7 +19,7 @@ const NewArticle = () => {
             title: '',
             description: '',
             body: '',
-            tagList:[' ']
+            tagList:['']
           }
         }
 
@@ -46,11 +46,13 @@ const NewArticle = () => {
 
 
     const onSubmit = async (data)=>{
+        
         let result
         try {
            if(isEdit){
-           
+            // console.log(data.article)
             result = await updateArticle(slug,data.article, user?.token)
+           
            }else{
             result =  await createArticle(data.article, user?.token)
            }
@@ -62,6 +64,17 @@ const NewArticle = () => {
         }
         
     }
+   
+  // Handle Navigage page when user create new_article without login
+  if(!isLoging){
+      return(
+        <Navigate
+        to={'/login'}
+        replace
+        />
+      )
+  }
+
   return (
     <div className="bg-white mt-5 max-w-3xl mx-auto p-5 rounded-sm shadow-lg space-y-5">
       <h1 className="text-center">{isEdit?'Edit article':'Create new article'}</h1>
@@ -112,7 +125,7 @@ const NewArticle = () => {
                     <input
                     type="text"
                     className="border border-gray-400 p-1 rounded-sm"
-                    {...register(`article.tagList.${index}`)}
+                    { ...register(`article.tagList.${index}`)}
                         placeholder={`tag`}
                     />
                     
@@ -126,8 +139,8 @@ const NewArticle = () => {
                     {/* បន្ថែម tag ហើយបង្ហាញតាម index ចុងក្រោយ */}
                     {(fields.length-1 === index)? 
                     <button 
-                    className="border border-blue-400 px-5 text-blue-500 rounded-sm"
-                        onClick={()=>append(' ')}
+                    className="border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300"
+                        onClick={()=>append('')}
                     >
                         Add tag
                     </button>
@@ -135,12 +148,17 @@ const NewArticle = () => {
 
              </div>
             ))}
-                
-
-
+        
         </div>
-      
             
+            {/* Default tag */}
+          {(fields.length< 1) &&(<button 
+                    className="border border-blue-400 px-5 text-blue-500 rounded-sm block mt-1 duration-500 transition-all"
+                    onClick={()=>append('')}
+                    >
+                      Tag
+                    </button>)}
+          
           <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5">
             {isEdit? 'Update': 'Send'}
           </button>
