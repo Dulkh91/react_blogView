@@ -8,7 +8,7 @@ export const CreateUserAction = async ({ request }) => {
     const name = formData.get("name");
     const email = formData.get("email");
     const password = formData.get("password");
-    const repeadPassword = formData.get('repeadPassword')
+    const repeadPassword = formData.get("repeadPassword");
 
     const errors = [];
 
@@ -20,10 +20,10 @@ export const CreateUserAction = async ({ request }) => {
     } else if (!/\S+@\S+\.\S+/.test(email)) {
       errors.email = "Checks the email format";
     }
-    if(!password){
-        errors.password = "Please insert password"
-    }else if (password !== repeadPassword) {
-      errors.repeadPassword = 'Passwords do not match';
+    if (!password) {
+      errors.password = "Please insert password";
+    } else if (password !== repeadPassword) {
+      errors.repeadPassword = "Passwords do not match";
     }
 
     //ប្រសិនមាន error ណាមួយនោះវានឹង return errors
@@ -34,17 +34,17 @@ export const CreateUserAction = async ({ request }) => {
     const response = await fetch(`${URL_API}/users`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify({
-    //     user: {
-    //       username: formData.get("name"),
-    //       email: formData.get("email"),
-    //       password: formData.get("password"),
-    //     },
-    //   }),
+      //   body: JSON.stringify({
+      //     user: {
+      //       username: formData.get("name"),
+      //       email: formData.get("email"),
+      //       password: formData.get("password"),
+      //     },
+      //   }),
     });
-    if(!response.ok) return errors
-    console.log(response.json())
-    return redirect('/sign_up')
+    if (!response.ok) return errors;
+    console.log(response.json());
+    return redirect("/sign_up");
   } catch (error) {
     return error;
   }

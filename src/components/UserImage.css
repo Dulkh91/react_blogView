@@ -1,18 +1,18 @@
 .username {
-    display: inline-block;
-    margin-right: 10px; /* គម្លាតរវាង username និង image */
+  display: inline-block;
+  margin-right: 10px; /* គម្លាតរវាង username និង image */
 }
 
 .relative {
-    position: relative; /* ធ្វើឱ្យ absolute positioning នៃ modal ធ្វើការត្រឹមត្រូវ */
+  position: relative; /* ធ្វើឱ្យ absolute positioning នៃ modal ធ្វើការត្រឹមត្រូវ */
 }
 
 .absolute {
-    opacity: 0; /* សម្រាប់ animation */
-    transform: translateY(-10px); /* ចាប់ផ្តើមពីខាងលើបន្តិច */
+  opacity: 0; /* សម្រាប់ animation */
+  transform: translateY(-10px); /* ចាប់ផ្តើមពីខាងលើបន្តិច */
 }
 
 .absolute.transition-all {
-    opacity: 1; /* បង្ហាញ modal */
-    transform: translateY(0); /* ផ្លាស់ទៅទីតាំងធម្មតា */
+  opacity: 1; /* បង្ហាញ modal */
+  transform: translateY(0); /* ផ្លាស់ទៅទីតាំងធម្មតា */
 }

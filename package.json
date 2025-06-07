@@ -9,6 +9,7 @@
     "preview": "vite preview",
     "prepare": "husky",
     "lint": "eslint .",
+    "format": "prettier --check .",
     "test": "echo \"Run test here...\" "
   },
   "dependencies": {
@@ -31,6 +32,7 @@
     "globals": "^16.2.0",
     "husky": "^9.1.7",
     "postcss": "^8.5.3",
+    "prettier": "^3.5.3",
     "tailwindcss": "^4.1.7",
     "vite": "^6.3.5"
   }
