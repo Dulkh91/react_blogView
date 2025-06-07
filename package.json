@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "prepare": "husky",
     "lint": "eslint .",
-    "format": "prettier --check --write.",
+    "format": "prettier --write .",
     "test": "echo \"Run test here...\" "
   },
   "dependencies": {

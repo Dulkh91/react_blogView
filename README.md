@@ -43,8 +43,7 @@ VITE_API_URL=http://your-api-url.com
 Replace your-api-url.com with the backend API URL your're using
 
 ### endpoints
-
-## The API is followed endpoints of <a href="https://bump.sh/gerome-grignon-lp2/doc/realworld/" > RealWorld </a>
+The API is followed endpoints of <a href="https://bump.sh/gerome-grignon-lp2/doc/realworld/" > RealWorld </a>
 
 ## Feature Previews
 
