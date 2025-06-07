@@ -16,6 +16,7 @@ The blogView users can to create new account, login and post some a article
 
 ```bash
 git clone https://github.com/Dulkh91/react_blogView.git
+
 cd react_blogView
 ```
 
@@ -33,7 +34,7 @@ npm run dev
 
 ## Environment Variables
 
-Create a .env file in the root directory
+Create a **.env** file in the root directory
 
 ```env
 VITE_API_URL=http://your-api-url.com
@@ -43,8 +44,7 @@ Replace your-api-url.com with the backend API URL your're using
 
 ### endpoints
 
-![RealWorld](https://bump.sh/gerome-grignon-lp2/doc/realworld/)
-The API is followed endpoints of RealWorld
+## The API is followed endpoints of <a href="https://bump.sh/gerome-grignon-lp2/doc/realworld/" > RealWorld </a>
 
 ## Feature Previews
 
