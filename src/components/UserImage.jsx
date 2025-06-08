@@ -2,9 +2,13 @@
 import imageDefault from "../assets/imageDefault.png";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
-const UserImage = ({ user }) => {
+import { useAuthContext } from "../context/AuthContext";
+
+const UserImage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const modalRef = useRef(null);
+
+  const {user} = useAuthContext()
 
   const handleClickOutside = (e) => {
     if (modalRef.current && !modalRef.current.contains(e.target)) {

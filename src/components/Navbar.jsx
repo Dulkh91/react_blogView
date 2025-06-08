@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import { useAuthContext } from "../context/AuthContext";
-import imageDefault from "../assets/imageDefault.png";
 import UserImage from "./UserImage";
+
 const Navbar = () => {
   const { isLoging, logout, user } = useAuthContext();
   const path = useLocation();
@@ -11,7 +11,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white p-4 text-lg flex justify-between items-center">
+    <nav className=" relative bg-white top-0 left-0 w-full p-4 text-lg flex justify-between items-center z-30 ">
       <Link to="/">
         <h1>Realworld blog</h1>
       </Link>
@@ -26,7 +26,7 @@ const Navbar = () => {
             </Link>
 
             {/* Image and name user */}
-            <UserImage user={user} />
+            <UserImage/>
 
             <button
               className="p-2 px-4 rounded-sm hover:border hover:border-gray-300"

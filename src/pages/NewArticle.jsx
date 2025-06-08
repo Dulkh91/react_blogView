@@ -2,17 +2,20 @@ import useArticle from "../hooks/useArticle";
 import { useAuthContext } from "../context/AuthContext";
 import { useForm, useFieldArray } from "react-hook-form";
 import { useParams, useNavigate, Navigate } from "react-router-dom";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import CencalBTN from "../components/CencalBTN";
+import ModalClose from "../modal/ModalClose";
 
 const NewArticle = () => {
   const navi = useNavigate();
   const { createArticle, errors, updateArticle } = useArticle();
   const { slug } = useParams(); // Get slug for edit article
+  const [isModelOpen, setIsModelOpen] = useState(false)
 
   const isEdit = Boolean(slug);
   const { user, isLoging } = useAuthContext();
 
-  const { register, handleSubmit, control, setValue } = useForm({
+  const { register, handleSubmit, control,watch, setValue } = useForm({
     defaultValues: {
       article: {
         title: "",
@@ -45,29 +48,33 @@ const NewArticle = () => {
   }, [slug, setValue]);
 
   const onSubmit = async (data) => {
-    
+   
     try {
       if (isEdit) {
         // console.log(data.article)
-         await updateArticle(slug, data.article, user?.token);
-         navi('/articles')
+        await updateArticle(slug, data.article, user?.token);
+        navi("/articles");
       } else {
-       const result = await createArticle(data.article, user?.token);
+        const result = await createArticle(data.article, user?.token);
         navi(`/articles/${result.slug}`);
       }
-      
     } catch (error) {
       alert("Post failed:" + error.message);
     }
   };
+
+//ធ្វើ delage input ថាមានទិន្ន័យទេ?
+const watchTitle = watch('article.title').length
+const watchBody = watch('article.body').length
+const watchInput = Boolean(watchTitle || watchBody)
 
   // Handle Navigage page when user create new_article without login
   if (!isLoging) {
     return <Navigate to={"/login"} replace />;
   }
 
-  return (
-    <div className="bg-white mt-5 max-w-3xl mx-auto p-5 rounded-sm shadow-lg space-y-5">
+  return (<>
+    <div className="bg-white relative mt-5 max-w-3xl mx-auto p-5 rounded-sm shadow-lg space-y-5 ">
       <h1 className="text-center">
         {isEdit ? "Edit article" : "Create new article"}
       </h1>
@@ -160,7 +167,25 @@ const NewArticle = () => {
           {isEdit ? "Update" : "Send"}
         </button>
       </form>
+
+
+      {/* Cancel Button */}
+        <span className=" absolute top-2 right-2"
+          onClick={()=> watchInput? setIsModelOpen(true): navi("/")}//ប្រសិនជាមានទិន្ន័យក្នុង input នោះចេញ Modal ។ បើអត់ navi("/") ដំណើរការ
+        >
+            <CencalBTN />
+        </span>
+
     </div>
-  );
+    
+  {/* Handle Modal close */}
+          { isModelOpen && (
+            <span className="bg-gray-600 w-full">
+              <ModalClose title={isEdit? 'edit article':'create new artilce'} 
+              isModalOpen={()=>setIsModelOpen(false)} />
+             </span>)})
+      
+      
+  </>);
 };
 export default NewArticle;

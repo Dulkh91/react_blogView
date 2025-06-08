@@ -7,7 +7,7 @@ import { useAuthContext } from "../context/AuthContext";
 import DeleteBtn from "../components/DeleteBtn";
 
 const Article = () => {
-  const { isLoging } = useAuthContext();
+  const { isLoging, user } = useAuthContext();
   const { slug } = useParams();
   const API_URL = import.meta.env.VITE_API_URL;
   // `https://realworld.habsidev.com/api/articles/${slug}`
@@ -17,7 +17,13 @@ const Article = () => {
   if (loading) return <div className="flex justify-center">Loading....</div>;
 
   //  console.log(data.article.slug)
-  // console.log(data.article)
+  // console.log(data?.article?.author?.username)
+  // console.log(user?.username) // check email user
+  const users = data?.article?.author?.username;
+  const IsUser = user?.username
+  const userCorrent = Boolean(users === IsUser)
+
+
   return (
     <div className="max-w-4xl mx-auto bg-white mt-5 p-5 rounded-sm shadow-lg space-y-4">
       <section className="flex justify-between gap-4 items-start">
@@ -33,7 +39,7 @@ const Article = () => {
         <div className=" text-right flex-shrink-0">
           <Profile dataProfile={data.article} />
 
-          {isLoging && (
+          {(isLoging && userCorrent) && (
             <div className=" space-x-3 mt-5 text-sm flex justify-end">
               {/* Delete article */}
               <DeleteBtn />

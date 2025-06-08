@@ -3,11 +3,15 @@ import { useForm } from "react-hook-form";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 import CencalBTN from "../components/CencalBTN";
+import ModalClose from "../modal/ModalClose";
 
 const EditProfile = () => {
   const [formErrors, setFormErrors] = useState(null);
   const navi = useNavigate();
   const { editProfile, user, isLoging } = useAuthContext();
+
+  const [isModelOpen, setIsModelOpen] = useState(false)
+  
 
   const {
     register,
@@ -46,15 +50,16 @@ const EditProfile = () => {
   // Handle page edit profile withou login
   if (!isLoging) return <Navigate to={`/login`} replace />;
 
-  return (
+
+  return (<>
     <div className="relative bg-white mt-5 max-w-md mx-auto p-5 shadow-lg rounded-sm">
-      
+
       <form method="post" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="mb-5 text-center font-bold">Edit Profile</h2>
         {/* user name */}
         <div className="mb-5">
           <label htmlFor="bio" className="block mb-1 text-sm">
-            bio 
+            bio
           </label>
           <input
             type="text"
@@ -174,12 +179,20 @@ const EditProfile = () => {
           </button>
         </div>
       </form>
+      
+        {/* Close BTN */}
+      <span className=" absolute top-2 right-2" onClick={()=>setIsModelOpen(true)}>
+        <CencalBTN />
+      </span>
 
-          <span className=" absolute top-2 right-2">
-            <CencalBTN/>
-          </span>
-
+     
     </div>
+
+           {/* Handle Modal close */}
+          {isModelOpen && (<span className="bg-gray-600 w-full"> <ModalClose title={`edit profile`} isModalOpen={()=>setIsModelOpen(false)} /></span>)}
+     
+
+    </>
   );
 };
 

@@ -107,7 +107,7 @@ const useAuth = () => {
 
   const editProfile = async (userProfile) => {
     const token = localStorage.getItem("authToken");
-    console.log(userProfile);
+
     try {
       const response = await fetch(`${API_URL}/user`, {
         method: "PUT",
@@ -120,8 +120,8 @@ const useAuth = () => {
 
       if (!response.ok) throw new Error("Update profile is failed");
       const result = await response.json();
-
-      return result;
+      setUser(result.user) 
+      return result.user;
     } catch (error) {
       setErrors(error.message);
       throw error;
