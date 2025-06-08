@@ -2,6 +2,7 @@ import { useAuthContext } from "../context/AuthContext";
 import { useForm } from "react-hook-form";
 import { useNavigate, Navigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import CencalBTN from "../components/CencalBTN";
 
 const EditProfile = () => {
   const [formErrors, setFormErrors] = useState(null);
@@ -46,13 +47,14 @@ const EditProfile = () => {
   if (!isLoging) return <Navigate to={`/login`} replace />;
 
   return (
-    <div className="bg-white mt-5 max-w-md mx-auto p-5 shadow-lg rounded-sm">
+    <div className="relative bg-white mt-5 max-w-md mx-auto p-5 shadow-lg rounded-sm">
+      
       <form method="post" onSubmit={handleSubmit(onSubmit)}>
         <h2 className="mb-5 text-center font-bold">Edit Profile</h2>
         {/* user name */}
         <div className="mb-5">
           <label htmlFor="bio" className="block mb-1 text-sm">
-            Username
+            bio 
           </label>
           <input
             type="text"
@@ -172,6 +174,11 @@ const EditProfile = () => {
           </button>
         </div>
       </form>
+
+          <span className=" absolute top-2 right-2">
+            <CencalBTN/>
+          </span>
+
     </div>
   );
 };

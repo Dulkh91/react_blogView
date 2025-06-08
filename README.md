@@ -5,6 +5,7 @@
 - Create a new account
 - Log in and manage their sessions
 - Create, view, edit, delete articles and edit profile
+- To visit <a href="https://react-blog-view.vercel.app/" target="_blank">https://react-blog-view.vercel.app/</a>
 
 ---
 
@@ -43,7 +44,8 @@ VITE_API_URL=http://your-api-url.com
 Replace your-api-url.com with the backend API URL your're using
 
 ### endpoints
-The API is followed endpoints of <a href="https://bump.sh/gerome-grignon-lp2/doc/realworld/" > RealWorld </a>
+
+The API is followed endpoints of <a href="https://bump.sh/gerome-grignon-lp2/doc/realworld/" target="_blank" > RealWorld </a>
 
 ## Feature Previews
 
@@ -71,4 +73,4 @@ Pull requests are welcome! If you'd like to improve the app or add features, fee
 
 ## Author
 
-Created by Dulkh91
+Created by <a href="https://github.com/Dulkh91"> Dulkh91 </a>

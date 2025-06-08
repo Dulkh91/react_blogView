@@ -45,15 +45,17 @@ const NewArticle = () => {
   }, [slug, setValue]);
 
   const onSubmit = async (data) => {
-    let result;
+    
     try {
       if (isEdit) {
         // console.log(data.article)
-        result = await updateArticle(slug, data.article, user?.token);
+         await updateArticle(slug, data.article, user?.token);
+         navi('/articles')
       } else {
-        result = await createArticle(data.article, user?.token);
+       const result = await createArticle(data.article, user?.token);
+        navi(`/articles/${result.slug}`);
       }
-      navi(`/articles/${result.slug}`);
+      
     } catch (error) {
       alert("Post failed:" + error.message);
     }
