@@ -4,7 +4,7 @@ const TagList = ({ data }) => {
       {data.tagList &&
         data.tagList.map((tag) => (
           <button
-            className={`border border-gray-400 rounded-sm px-2 opacity-50 ${
+            className={`border border-gray-400 rounded-xs text-sm md:text-md px-2 opacity-50 ${
               tag === null ? "hidden" : ""
             }`}
             key={tag}

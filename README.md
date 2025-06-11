@@ -62,6 +62,8 @@ The API is followed endpoints of <a href="https://bump.sh/gerome-grignon-lp2/doc
 - TailwindCSS
 - React Router DOM
 - React Hook Form
+- husky
+- eslint
 
 ## License
 

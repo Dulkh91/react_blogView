@@ -14,21 +14,16 @@ const Article = () => {
 
   const { data, loading } = useLogin(`${API_URL}/articles/${slug}`);
 
-  if (loading) return <div className="flex justify-center">Loading....</div>;
+  if (loading) return <div className="flex justify-center items-center">Loading....</div>;
 
-  //  console.log(data.article.slug)
-  // console.log(data?.article?.author?.username)
-  // console.log(user?.username) // check email user
-  const users = data?.article?.author?.username;
-  const IsUser = user?.username
-  const userCorrent = Boolean(users === IsUser)
-
+  // Check current user
+  const isAuth = data?.article?.author?.username === user?.username;
 
   return (
     <div className="max-w-4xl mx-auto bg-white mt-5 p-5 rounded-sm shadow-lg space-y-4">
       <section className="flex justify-between gap-4 items-start">
         <main className=" flex-1">
-          <Header titleData={data.article} />
+            <Header titleData={data.article} />
           <div id="tag" className=" flex items-center gap-2">
             <TagList data={data.article} />
           </div>
@@ -39,7 +34,7 @@ const Article = () => {
         <div className=" text-right flex-shrink-0">
           <Profile dataProfile={data.article} />
 
-          {(isLoging && userCorrent) && (
+          {isLoging && isAuth && (
             <div className=" space-x-3 mt-5 text-sm flex justify-end">
               {/* Delete article */}
               <DeleteBtn />

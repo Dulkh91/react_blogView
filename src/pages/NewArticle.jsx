@@ -10,12 +10,12 @@ const NewArticle = () => {
   const navi = useNavigate();
   const { createArticle, errors, updateArticle } = useArticle();
   const { slug } = useParams(); // Get slug for edit article
-  const [isModelOpen, setIsModelOpen] = useState(false)
+  const [isModelOpen, setIsModelOpen] = useState(false);
 
   const isEdit = Boolean(slug);
   const { user, isLoging } = useAuthContext();
 
-  const { register, handleSubmit, control,watch, setValue } = useForm({
+  const { register, handleSubmit, control, watch, setValue } = useForm({
     defaultValues: {
       article: {
         title: "",
@@ -48,7 +48,6 @@ const NewArticle = () => {
   }, [slug, setValue]);
 
   const onSubmit = async (data) => {
-   
     try {
       if (isEdit) {
         // console.log(data.article)
@@ -63,129 +62,130 @@ const NewArticle = () => {
     }
   };
 
-//ធ្វើ delage input ថាមានទិន្ន័យទេ?
-const watchTitle = watch('article.title').length
-const watchBody = watch('article.body').length
-const watchInput = Boolean(watchTitle || watchBody)
+  //ធ្វើ delage input ថាមានទិន្ន័យទេ?
+  const watchTitle = watch("article.title").length;
+  const watchBody = watch("article.body").length;
+  const watchInput = Boolean(watchTitle || watchBody);
 
   // Handle Navigage page when user create new_article without login
   if (!isLoging) {
     return <Navigate to={"/login"} replace />;
   }
 
-  return (<>
-    <div className="bg-white relative mt-5 max-w-3xl mx-auto p-5 rounded-sm shadow-lg space-y-5 ">
-      <h1 className="text-center">
-        {isEdit ? "Edit article" : "Create new article"}
-      </h1>
-      <form method="post" onSubmit={handleSubmit(onSubmit)}>
-        {/* Title field */}
-        <div>
-          <label htmlFor="title">Title</label>
-          <input
-            type="text"
-            name="title"
-            className="border border-gray-400 block w-full rounded-sm p-2"
-            placeholder="title"
-            {...register("article.title")}
-            autoFocus
-          />
-        </div>
+  return (
+    <>
+      <div className="bg-white relative mt-5 max-w-3xl mx-auto p-5 rounded-sm shadow-lg space-y-5 ">
+        <h1 className="text-center">
+          {isEdit ? "Edit article" : "Create new article"}
+        </h1>
+        <form method="post" onSubmit={handleSubmit(onSubmit)}>
+          {/* Title field */}
+          <div>
+            <label htmlFor="title">Title</label>
+            <input
+              type="text"
+              name="title"
+              className="border border-gray-400 block w-full rounded-sm p-2"
+              placeholder="title"
+              {...register("article.title")}
+              autoFocus
+            />
+          </div>
 
-        {/* Description field */}
-        <div>
-          <label htmlFor="description">Short description</label>
-          <input
-            type="text"
-            name="description"
-            className="border border-gray-400 block w-full rounded-sm p-2"
-            {...register("article.description")}
-            placeholder="title"
-          />
-        </div>
+          {/* Description field */}
+          <div>
+            <label htmlFor="description">Short description</label>
+            <input
+              type="text"
+              name="description"
+              className="border border-gray-400 block w-full rounded-sm p-2"
+              {...register("article.description")}
+              placeholder="title"
+            />
+          </div>
 
-        {/* Body field */}
-        <div>
-          <label htmlFor="text">Text</label>
-          <textarea
-            rows={5}
-            className="block border border-gray-400 p-2.5 w-full text-sm rounded-sm"
-            placeholder="Text"
-            {...register("article.body")}
-          ></textarea>
-        </div>
+          {/* Body field */}
+          <div>
+            <label htmlFor="text">Text</label>
+            <textarea
+              rows={5}
+              className="block border border-gray-400 p-2.5 w-full text-sm rounded-sm"
+              placeholder="Text"
+              {...register("article.body")}
+            ></textarea>
+          </div>
 
-        {/* Tag field */}
-        <div className=" space-y-1">
-          <label htmlFor="description">Tag</label>
+          {/* Tag field */}
+          <div className=" space-y-1">
+            <label htmlFor="description">Tag</label>
 
-          {fields.map((field, index) => (
-            <div className="flex gap-5" key={field.id}>
-              <input
-                type="text"
-                className="border border-gray-400 p-1 rounded-sm"
-                {...register(`article.tagList.${index}`)}
-                placeholder={`tag`}
-              />
+            {fields.map((field, index) => (
+              <div className="flex gap-5" key={field.id}>
+                <input
+                  type="text"
+                  className="border border-gray-400 p-1 rounded-sm"
+                  {...register(`article.tagList.${index}`)}
+                  placeholder={`tag`}
+                />
 
-              {/* លុប tag តាម index */}
-              <button
-                className={`border border-red-500 px-5 text-red-500 rounded-sm`}
-                onClick={() => {
-                  if (fields.length > 1) remove(index);
-                }}
-              >
-                Delete
-              </button>
-
-              {/* បន្ថែម tag ហើយបង្ហាញតាម index ចុងក្រោយ */}
-              {fields.length - 1 === index ? (
+                {/* លុប tag តាម index */}
                 <button
-                  className="border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300"
-                  onClick={() => append("")}
+                  className={`border border-red-500 px-5 text-red-500 rounded-sm`}
+                  onClick={() => {
+                    if (fields.length > 1) remove(index);
+                  }}
                 >
-                  Add tag
+                  Delete
                 </button>
-              ) : (
-                ""
-              )}
-            </div>
-          ))}
-        </div>
 
-        {/* Default tag */}
-        {fields.length < 1 && (
-          <button
-            className="border border-blue-400 px-5 text-blue-500 rounded-sm block mt-1 duration-500 transition-all"
-            onClick={() => append("")}
-          >
-            Tag
+                {/* បន្ថែម tag ហើយបង្ហាញតាម index ចុងក្រោយ */}
+                {fields.length - 1 === index ? (
+                  <button
+                    className="border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300"
+                    onClick={() => append("")}
+                  >
+                    Add tag
+                  </button>
+                ) : (
+                  ""
+                )}
+              </div>
+            ))}
+          </div>
+
+          {/* Default tag */}
+          {fields.length < 1 && (
+            <button
+              className="border border-blue-400 px-5 text-blue-500 rounded-sm block mt-1 duration-500 transition-all"
+              onClick={() => append("")}
+            >
+              Tag
+            </button>
+          )}
+
+          <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5">
+            {isEdit ? "Update" : "Send"}
           </button>
-        )}
+        </form>
 
-        <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5">
-          {isEdit ? "Update" : "Send"}
-        </button>
-      </form>
-
-
-      {/* Cancel Button */}
-        <span className=" absolute top-2 right-2"
-          onClick={()=> watchInput? setIsModelOpen(true): navi("/")}//ប្រសិនជាមានទិន្ន័យក្នុង input នោះចេញ Modal ។ បើអត់ navi("/") ដំណើរការ
+        {/* Cancel Button */}
+        <span
+          className=" absolute top-2 right-2"
+          onClick={() => (watchInput ? setIsModelOpen(true) : navi("/"))} //ប្រសិនជាមានទិន្ន័យក្នុង input នោះចេញ Modal ។ បើអត់ navi("/") ដំណើរការ
         >
-            <CencalBTN />
+          <CencalBTN />
         </span>
-
-    </div>
-    
-  {/* Handle Modal close */}
-          { isModelOpen && (
-            <span className="bg-gray-600 w-full">
-              <ModalClose title={isEdit? 'edit article':'create new artilce'} 
-              isModalOpen={()=>setIsModelOpen(false)} />
-             </span>)})
-      
-      
-  </>);
+      </div>
+      {/* Handle Modal close */}
+      {isModelOpen && (
+        <span className="bg-gray-600 w-full">
+          <ModalClose
+            title={isEdit ? "edit article" : "create new artilce"}
+            isModalOpen={() => setIsModelOpen(false)}
+          />
+        </span>
+      )}
+    </>
+  );
 };
 export default NewArticle;
