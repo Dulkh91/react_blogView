@@ -14,7 +14,8 @@ const Article = () => {
 
   const { data, loading } = useLogin(`${API_URL}/articles/${slug}`);
 
-  if (loading) return <div className="flex justify-center items-center">Loading....</div>;
+  if (loading)
+    return <div className="flex justify-center items-center">Loading....</div>;
 
   // Check current user
   const isAuth = data?.article?.author?.username === user?.username;
@@ -23,7 +24,7 @@ const Article = () => {
     <div className="max-w-4xl mx-auto bg-white mt-5 p-5 rounded-sm shadow-lg space-y-4">
       <section className="flex justify-between gap-4 items-start">
         <main className=" flex-1">
-            <Header titleData={data.article} />
+          <Header titleData={data.article} />
           <div id="tag" className=" flex items-center gap-2">
             <TagList data={data.article} />
           </div>

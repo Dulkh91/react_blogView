@@ -8,14 +8,14 @@ import ModalClose from "../modal/ModalClose";
 
 const NewArticle = () => {
   const navi = useNavigate();
-  const { createArticle, errors, updateArticle } = useArticle();
+  const { createArticle,  updateArticle } = useArticle();
   const { slug } = useParams(); // Get slug for edit article
   const [isModelOpen, setIsModelOpen] = useState(false);
 
   const isEdit = Boolean(slug);
   const { user, isLoging } = useAuthContext();
 
-  const { register, handleSubmit, control, watch, setValue } = useForm({
+  const { register, handleSubmit, control, watch, setValue,reset } = useForm({
     defaultValues: {
       article: {
         title: "",
@@ -44,7 +44,11 @@ const NewArticle = () => {
           setValue("article.body", data.article.body);
           setValue("article.tagList", data.article.tagList);
         });
+    }else{
+        reset("")
+        console.log(" article")
     }
+    
   }, [slug, setValue]);
 
   const onSubmit = async (data) => {
@@ -115,33 +119,33 @@ const NewArticle = () => {
             ></textarea>
           </div>
 
-          {/* Tag field */}
-          <div className=" space-y-1">
-            <label htmlFor="description">Tag</label>
-
+          {/* Tag field section */}
+          <div className="space-y-2">
+            <span>Tag</span>
             {fields.map((field, index) => (
-              <div className="flex gap-5" key={field.id}>
+              <div className="flex gap-1 md:gap-5 items-center " key={field.id}>
+                {/* inpute tag */}
                 <input
                   type="text"
-                  className="border border-gray-400 p-1 rounded-sm"
+                  className="border border-gray-400 p-0.5 md:p-1.5 w-1/3  rounded-xs"
                   {...register(`article.tagList.${index}`)}
                   placeholder={`tag`}
                 />
 
                 {/* លុប tag តាម index */}
                 <button
-                  className={`border border-red-500 px-5 text-red-500 rounded-sm`}
+                  className={`border border-red-500 px-5 text-red-500 rounded-sm p-0.5 md:p-1.5`}
                   onClick={() => {
                     if (fields.length > 1) remove(index);
                   }}
                 >
                   Delete
                 </button>
-
+                  
                 {/* បន្ថែម tag ហើយបង្ហាញតាម index ចុងក្រោយ */}
                 {fields.length - 1 === index ? (
                   <button
-                    className="border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300"
+                     className="border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300 p-0.5 md:p-1.5"
                     onClick={() => append("")}
                   >
                     Add tag
@@ -156,14 +160,14 @@ const NewArticle = () => {
           {/* Default tag */}
           {fields.length < 1 && (
             <button
-              className="border border-blue-400 px-5 text-blue-500 rounded-sm block mt-1 duration-500 transition-all"
+              className="border border-blue-400 px-4 md:px-5 text-blue-500 rounded-sm block mt-1 duration-500 transition-all"
               onClick={() => append("")}
             >
               Tag
             </button>
           )}
 
-          <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5">
+          <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5 select-none">
             {isEdit ? "Update" : "Send"}
           </button>
         </form>

@@ -49,7 +49,7 @@ const useArticle = () => {
 
       if (!response.ok) throw new Error("Update failed");
       const data = await response.json();
-      console.log(data)
+      console.log(data);
       return data.article;
     } catch (error) {
       setErrors(error.message);
@@ -84,22 +84,23 @@ const useArticle = () => {
   };
 
   // Link & unlike button
-  const onFavorite = async(method, slug,token)=>{
-      try {
-        const response = await fetch(`${API_URL}/articles/${slug}/favorite`,{
-          method: method,
-          headers: {'Content-Type': 'application/json',
-              'Authorization': `Token ${token}`
-          }
-        })
-        if(!response.ok) throw new Error('Server problem')
-         const result = await response.json()
-        return result
-      } catch (error) {
-        setErrors(error.message)
-        throw error
-      }
-  }
+  const onFavorite = async (method, slug, token) => {
+    try {
+      const response = await fetch(`${API_URL}/articles/${slug}/favorite`, {
+        method: method,
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${token}`,
+        },
+      });
+      if (!response.ok) throw new Error("Server problem");
+      const result = await response.json();
+      return result;
+    } catch (error) {
+      setErrors(error.message);
+      throw error;
+    }
+  };
 
   return { createArticle, errors, updateArticle, deleteArticle, onFavorite };
 };

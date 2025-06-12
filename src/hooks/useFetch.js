@@ -5,9 +5,7 @@ export const useLogin = (url) => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-
-
-  const tokenDefault = import.meta.env.VITE_TOKET_KEY
+  const tokenDefault = import.meta.env.VITE_TOKET_KEY;
 
   useEffect(() => {
     const token = localStorage.getItem("token") || tokenDefault;
@@ -21,7 +19,7 @@ export const useLogin = (url) => {
         });
         if (!response.ok) throw new Error("មានបញ្ហាក្នុងការទាញទិន្នន័យ");
         const result = await response.json();
-        
+
         setData(result);
       } catch (error) {
         setError(error.message);
@@ -33,5 +31,5 @@ export const useLogin = (url) => {
     fetchData();
   }, [url]);
 
-  return { data, loading, error};
+  return { data, loading, error };
 };

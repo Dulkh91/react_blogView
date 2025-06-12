@@ -7,7 +7,9 @@ const Header = ({ titleData }) => {
   const { user, isLoging } = useAuthContext();
   const { onFavorite } = useArticle();
   const [favorited, setFavorited] = useState(titleData.favorited);
-  const [favoritesCount, setFavoritesCount] = useState(titleData.favoritesCount);
+  const [favoritesCount, setFavoritesCount] = useState(
+    titleData.favoritesCount,
+  );
   const [error, setError] = useState(null);
 
   const handleFavorite = async () => {
@@ -42,18 +44,23 @@ const Header = ({ titleData }) => {
   return (
     <div className="flex items-center">
       <Link to={`/articles/${titleData.slug}`}>
-        <h2 className="text-blue-500 text-md md:text-lg cursor-pointer">{titleData.title}</h2>
+        <h2 className="text-blue-500 text-md md:text-lg cursor-pointer">
+          {titleData.title}
+        </h2>
       </Link>
       <div className="ml-3 flex items-center gap-1">
         <button
           onClick={handleFavorite}
           disabled={!isLoging}
-          className={isLoging ? "cursor-pointer text-sm md:text-md" : "cursor-not-allowed opacity-50"}
+          className={
+            isLoging
+              ? "cursor-pointer text-sm md:text-md"
+              : "cursor-not-allowed opacity-50"
+          }
         >
           {favorited ? "❤️" : "♡"}
         </button>
         <span className=" text-sm md:text-md">{favoritesCount}</span>
-        
       </div>
       {error && <p className="text-red-500 text-sm ml-2">{error}</p>}
     </div>

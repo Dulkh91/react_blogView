@@ -16,7 +16,7 @@ const Navbar = () => {
         <h1>Realworld blog</h1>
       </Link>
 
-{/* Destop responsive */}
+      {/* Destop responsive */}
       <div className=" hidden md:flex">
         {isLoging ? (
           <div className="flex items-center gap-5">
@@ -92,7 +92,6 @@ const Navbar = () => {
           </div>
         )}
       </div>
-
     </nav>
   );
 };

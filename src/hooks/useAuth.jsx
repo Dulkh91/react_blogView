@@ -120,7 +120,7 @@ const useAuth = () => {
 
       if (!response.ok) throw new Error("Update profile is failed");
       const result = await response.json();
-      console.log(result)
+      console.log(result);
       setUser(result.user);
       return result.user;
     } catch (error) {

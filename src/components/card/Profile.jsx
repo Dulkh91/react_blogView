@@ -5,7 +5,9 @@ const Profile = ({ dataProfile }) => {
   return (
     <div className="flex items-center gap-2">
       <div>
-        <h1 className="md:text-lg text-md text-gray-500">{dataProfile.author.username}</h1>
+        <h1 className="md:text-lg text-md text-gray-500">
+          {dataProfile.author.username}
+        </h1>
         <p className="text-xs opacity-50">
           {new Date(dataProfile.createdAt).toDateString()}
         </p>
