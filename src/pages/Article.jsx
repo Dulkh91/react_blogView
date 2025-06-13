@@ -10,7 +10,7 @@ import loading_image from "../assets/loading.svg";
 const Article = () => {
   const { isLoging, user } = useAuthContext();
   const { slug } = useParams();
-  
+
   const { data, loading } = useFetchData(`articles/${slug}`);
 
   if (loading)

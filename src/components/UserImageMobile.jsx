@@ -1,4 +1,3 @@
-
 import imageDefault from "../assets/imageDefault.png";
 import { useState, useEffect, useRef } from "react";
 import { Link } from "react-router-dom";

@@ -5,10 +5,8 @@ import loading_image from "../assets/loading.svg";
 
 import { useFetchData } from "../hooks/useFetch";
 
-
 const Home = () => {
-
-  const { data, loading, error ,refecth} = useFetchData('articles');
+  const { data, loading, error, refecth } = useFetchData("articles");
 
   //  const [currentPage, setCurrentPage] = useState(1);
 

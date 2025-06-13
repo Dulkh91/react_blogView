@@ -30,28 +30,26 @@ const EditArticle = () => {
     name: "article.tagList",
   });
 
- 
   // fetch data for reuse in form
   useEffect(() => {
     const API_ULR = import.meta.env.VITE_API_URL;
     // បញ្ចូល value ទៅកាន់ input form
 
-      fetch(`${API_ULR}/articles/${slug}`)
-        .then((res) => res.json())
-        .then((data) => {
-          setValue("article.title", data.article.title);
-          setValue("article.description", data.article.description);
-          setValue("article.body", data.article.body);
-          setValue("article.tagList", data.article.tagList);
-        });
-   
+    fetch(`${API_ULR}/articles/${slug}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setValue("article.title", data.article.title);
+        setValue("article.description", data.article.description);
+        setValue("article.body", data.article.body);
+        setValue("article.tagList", data.article.tagList);
+      });
   }, [slug, setValue]);
 
   const onSubmit = async (data) => {
     try {
-        // console.log(data.article)
-        await updateArticle(slug, data.article, user?.token);
-        navi("/articles");
+      // console.log(data.article)
+      await updateArticle(slug, data.article, user?.token);
+      navi("/articles");
     } catch (error) {
       alert("Post failed:" + error.message);
     }
@@ -110,59 +108,64 @@ const EditArticle = () => {
           </div>
 
           {/* Tag field section */}
-          {fields.length !== 0 &&(
+          {fields.length !== 0 && (
             <div className="space-y-2">
-            <span>Tag</span>
-            {fields.map((field, index) => (
-                
-              <div className="flex gap-1 md:gap-5 items-center " key={field.id}>
-                {/* inpute tag */}
-                <input
-                  type="text"
-                  className="border border-gray-400 p-0.5 md:p-1.5 w-1/3  rounded-xs  opacity-30" disabled
-                  {...register(`article.tagList.${index}`)}
-                  placeholder={`tag`}
-                />
-
-                {/* លុប tag តាម index */}
-                <button
-                  className={`border border-red-500 px-5 text-red-500 rounded-sm p-0.5 md:p-1.5 opacity-30`} hidden 
-
-                  onClick={()=>remove(index)}
+              <span>Tag</span>
+              {fields.map((field, index) => (
+                <div
+                  className="flex gap-1 md:gap-5 items-center "
+                  key={field.id}
                 >
-                  Delete
-                </button>
+                  {/* inpute tag */}
+                  <input
+                    type="text"
+                    className="border border-gray-400 p-0.5 md:p-1.5 w-1/3  rounded-xs  opacity-30"
+                    disabled
+                    {...register(`article.tagList.${index}`)}
+                    placeholder={`tag`}
+                  />
 
-                {/* បន្ថែម tag ហើយបង្ហាញតាម index នៅក្រោយ delete */}
-                {(fields.length -1) === index ? (
+                  {/* លុប tag តាម index */}
                   <button
-                    className={`border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300 p-0.5 md:p-1.5 select-none
-                      ${watch(`article.tagList.${index}`).length === 0 && 'pointer-events-none opacity-30'}`}
-                      hidden
-                    onClick={() => append("")}
+                    className={`border border-red-500 px-5 text-red-500 rounded-sm p-0.5 md:p-1.5 opacity-30`}
+                    hidden
+                    onClick={() => remove(index)}
                   >
-                    Add tag
+                    Delete
                   </button>
-                ) : (
-                  ""
-                )}
-              </div>
-            ))}
-          </div>
+
+                  {/* បន្ថែម tag ហើយបង្ហាញតាម index នៅក្រោយ delete */}
+                  {fields.length - 1 === index ? (
+                    <button
+                      className={`border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300 p-0.5 md:p-1.5 select-none
+                      ${watch(`article.tagList.${index}`).length === 0 && "pointer-events-none opacity-30"}`}
+                      hidden
+                      onClick={() => append("")}
+                    >
+                      Add tag
+                    </button>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              ))}
+            </div>
           )}
 
           {/* Default tag */}
           {fields.length < 1 && (
             <button
               className={`border border-blue-400 px-4 md:px-5 text-blue-500 rounded-sm block mt-1 duration-500 transition-all 
-                ${!fields.length &&'hidden' }`}
+                ${!fields.length && "hidden"}`}
               onClick={() => append("")}
             >
               Tag
             </button>
           )}
-            {/* updata button */}
-          <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5 select-none">Update</button>
+          {/* updata button */}
+          <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5 select-none">
+            Update
+          </button>
         </form>
 
         {/* Cancel Button */}

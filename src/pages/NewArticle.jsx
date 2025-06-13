@@ -13,7 +13,7 @@ const NewArticle = () => {
 
   const { user, isLoging } = useAuthContext();
 
-  const { register, handleSubmit, control, watch,} = useForm({
+  const { register, handleSubmit, control, watch } = useForm({
     defaultValues: {
       article: {
         title: "",
@@ -31,9 +31,8 @@ const NewArticle = () => {
 
   const onSubmit = async (data) => {
     try {
-        const result = await createArticle(data.article, user?.token);
-        navi(`/articles/${result.slug}`);
-
+      const result = await createArticle(data.article, user?.token);
+      navi(`/articles/${result.slug}`);
     } catch (error) {
       alert("Post failed:" + error.message);
     }
@@ -94,7 +93,6 @@ const NewArticle = () => {
           <div className="space-y-2">
             <span>Tag</span>
             {fields.map((field, index) => (
-                
               <div className="flex gap-1 md:gap-5 items-center " key={field.id}>
                 {/* inpute tag */}
                 <input
@@ -107,17 +105,16 @@ const NewArticle = () => {
                 {/* លុប tag តាម index */}
                 <button
                   className={`border border-red-500 px-5 text-red-500 rounded-sm p-0.5 md:p-1.5`}
-
-                  onClick={()=>remove(index)}
+                  onClick={() => remove(index)}
                 >
                   Delete
                 </button>
 
                 {/* បន្ថែម tag ហើយបង្ហាញតាម index នៅក្រោយ delete */}
-                {(fields.length -1) === index ? (
+                {fields.length - 1 === index ? (
                   <button
                     className={`border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300 p-0.5 md:p-1.5 select-none
-                      ${watch(`article.tagList.${index}`).length === 0 && 'pointer-events-none opacity-30'}`}
+                      ${watch(`article.tagList.${index}`).length === 0 && "pointer-events-none opacity-30"}`}
                     onClick={() => append("")}
                   >
                     Add tag

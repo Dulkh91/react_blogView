@@ -2,7 +2,7 @@ import Header from "./Header";
 import Profile from "./Profile";
 import TagList from "./TagList";
 
-const Card = ({ data, onRefech}) => {
+const Card = ({ data, onRefech }) => {
   // console.log(data)
   return (
     <div className="max-w-4xl mx-auto bg-white mt-5 p-5 rounded-sm shadow-lg flex justify-between gap-4 items-start">
