@@ -3,10 +3,13 @@ import { useState } from "react";
 import useArticle from "../../hooks/useArticle";
 import { useAuthContext } from "../../context/AuthContext";
 
-const Header = ({ titleData }) => {
+
+const Header = ({ titleData, onRefech }) => {
   const { user, isLoging } = useAuthContext();
   const { onFavorite } = useArticle();
   const [favorited, setFavorited] = useState(titleData.favorited);
+  
+
   const [favoritesCount, setFavoritesCount] = useState(
     titleData.favoritesCount,
   );
@@ -39,6 +42,10 @@ const Header = ({ titleData }) => {
       setFavoritesCount(titleData.favoritesCount);
       setError(error.message);
     }
+    
+      // refecth on useFecth.js
+      onRefech()
+      
   };
 
   return (

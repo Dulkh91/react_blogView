@@ -1,14 +1,14 @@
 import { useSearchParams } from "react-router-dom";
 import Card from "../components/card/Card";
 import Pagination from "../components/Pagination";
-import loading_image from '../assets/loading.svg'
+import loading_image from "../assets/loading.svg";
 
-import { useLogin } from "../hooks/useFetch";
+import { useFetchData } from "../hooks/useFetch";
+
 
 const Home = () => {
-  const API_URL = `${import.meta.env.VITE_API_URL}/articles`;
 
-  const { data, loading, error } = useLogin(API_URL);
+  const { data, loading, error ,refecth} = useFetchData('articles');
 
   //  const [currentPage, setCurrentPage] = useState(1);
 
@@ -17,9 +17,12 @@ const Home = () => {
 
   const itemsPerPage = 5;
 
-  if (loading) return <div className="flex justify-center items-center min-h-screen">
-    <img src={loading_image} alt="" className="w-20 md:w-30"/>
-  </div>;
+  if (loading)
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src={loading_image} alt="" className="w-20 md:w-30" />
+      </div>
+    );
   if (error) return <div className="flex justify-center">{error.message}</div>;
 
   const totalPages = Math.ceil(data?.articles.length / itemsPerPage); // ចំនួនផេក
@@ -38,7 +41,7 @@ const Home = () => {
       <main className=" flex-1">
         {currentItems &&
           currentItems.map((article) => (
-            <Card key={article.title} data={article} />
+            <Card key={article.title} data={article} onRefech={refecth} />
           ))}
       </main>
       <footer className="pb-16">

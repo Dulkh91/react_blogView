@@ -57,7 +57,7 @@ const EditProfile = () => {
           {/* user name */}
           <div className="mb-5">
             <label htmlFor="bio" className="block mb-1 text-sm">
-              bio
+              Bio
             </label>
             <input
               type="text"

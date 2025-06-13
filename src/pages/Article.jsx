@@ -1,24 +1,24 @@
 import { Link, useParams } from "react-router-dom";
-import { useLogin } from "../hooks/useFetch";
+import { useFetchData } from "../hooks/useFetch";
 import Header from "../components/card/Header";
 import Profile from "../components/card/Profile";
 import TagList from "../components/card/TagList";
 import { useAuthContext } from "../context/AuthContext";
 import DeleteBtn from "../components/DeleteBtn";
-import loading_image from '../assets/loading.svg'
+import loading_image from "../assets/loading.svg";
 
 const Article = () => {
   const { isLoging, user } = useAuthContext();
   const { slug } = useParams();
-  const API_URL = import.meta.env.VITE_API_URL;
-  // `https://realworld.habsidev.com/api/articles/${slug}`
-
-  const { data, loading } = useLogin(`${API_URL}/articles/${slug}`);
+  
+  const { data, loading } = useFetchData(`articles/${slug}`);
 
   if (loading)
-    return <div className="flex justify-center items-center min-h-screen">
-        <img src={loading_image} alt="" className="w-20 md:w-30"/>
-      </div>;
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <img src={loading_image} alt="" className="w-20 md:w-30" />
+      </div>
+    );
 
   // Check current user
   const isAuth = data?.article?.author?.username === user?.username;

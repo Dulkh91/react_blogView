@@ -7,6 +7,7 @@ import Article from "../pages/Article";
 import NewArticle from "../pages/NewArticle";
 import EditProfile from "../pages/EditProfile";
 import ErrorPage from "../pages/ErrorPage";
+import EditArticle from "../pages/EditArticle";
 
 const router = createBrowserRouter([
   {
@@ -20,7 +21,7 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "articles/:slug", element: <Article /> },
       { path: "create_article", element: <NewArticle /> },
-      { path: "edit_article/:slug/edit", element: <NewArticle /> },
+      { path: "edit_article/:slug/edit", element: <EditArticle /> },
       { path: "edit_profile", element: <EditProfile /> },
       { path: "*", element: <ErrorPage /> },
     ],
