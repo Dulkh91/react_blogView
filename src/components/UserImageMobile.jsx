@@ -34,13 +34,12 @@ const UserImageMobile = () => {
     };
   }, [isOpen]);
 
-  const handleOpen = ()=>{
-    setIsOpen(false)
-  }
+  const handleOpen = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
-    
       {/* Mobile responsive */}
       <div className="md:hidden">
         <img
@@ -77,7 +76,7 @@ const UserImageMobile = () => {
             <Link to={`/edit_profile`}>
               <button
                 className=" bg-blue-500 text-white text-center text-sm w-full mt-3 p-1.5"
-                onClick={ handleOpen}
+                onClick={handleOpen}
               >
                 Edit profile
               </button>

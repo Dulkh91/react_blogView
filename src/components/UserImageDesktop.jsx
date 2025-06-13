@@ -34,9 +34,9 @@ const UserImageDesktop = () => {
     };
   }, [isOpen]);
 
-  const handleOpen = ()=>{
-    setIsOpen(false)
-  }
+  const handleOpen = () => {
+    setIsOpen(false);
+  };
 
   return (
     <>
@@ -68,11 +68,8 @@ const UserImageDesktop = () => {
                 </span>
               </div>
 
-              <Link to={`/edit_profile`}
-                onClick={handleOpen}
-              >
-                <button
-                  className=" bg-blue-500 text-white text-center text-sm rounded-sm w-full mt-3 p-1">
+              <Link to={`/edit_profile`} onClick={handleOpen}>
+                <button className=" bg-blue-500 text-white text-center text-sm rounded-sm w-full mt-3 p-1">
                   Edit profile
                 </button>
               </Link>

@@ -8,14 +8,14 @@ import ModalClose from "../modal/ModalClose";
 
 const NewArticle = () => {
   const navi = useNavigate();
-  const { createArticle,  updateArticle } = useArticle();
+  const { createArticle, updateArticle } = useArticle();
   const { slug } = useParams(); // Get slug for edit article
   const [isModelOpen, setIsModelOpen] = useState(false);
 
   const isEdit = Boolean(slug);
   const { user, isLoging } = useAuthContext();
 
-  const { register, handleSubmit, control, watch, setValue,reset } = useForm({
+  const { register, handleSubmit, control, watch, setValue, reset } = useForm({
     defaultValues: {
       article: {
         title: "",
@@ -44,11 +44,10 @@ const NewArticle = () => {
           setValue("article.body", data.article.body);
           setValue("article.tagList", data.article.tagList);
         });
-    }else{
-        reset("")
-        console.log(" article")
+    } else {
+      reset("");
+      console.log(" article");
     }
-    
   }, [slug, setValue]);
 
   const onSubmit = async (data) => {
@@ -141,11 +140,11 @@ const NewArticle = () => {
                 >
                   Delete
                 </button>
-                  
+
                 {/* បន្ថែម tag ហើយបង្ហាញតាម index ចុងក្រោយ */}
                 {fields.length - 1 === index ? (
                   <button
-                     className="border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300 p-0.5 md:p-1.5"
+                    className="border border-blue-400 px-5 text-blue-500 rounded-sm transition-all duration-300 p-0.5 md:p-1.5"
                     onClick={() => append("")}
                   >
                     Add tag

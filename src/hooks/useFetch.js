@@ -13,10 +13,7 @@ export const useLogin = (url) => {
 
     const fetchData = async () => {
       try {
-        const response = await fetch(url, {
-          method: "GET",
-          headers: { Authorization: token },
-        });
+        const response = await fetch(url, {method: "GET"});
         if (!response.ok) throw new Error("មានបញ្ហាក្នុងការទាញទិន្នន័យ");
         const result = await response.json();
 

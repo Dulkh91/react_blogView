@@ -1,6 +1,7 @@
 import { useSearchParams } from "react-router-dom";
 import Card from "../components/card/Card";
 import Pagination from "../components/Pagination";
+import loading_image from '../assets/loading.svg'
 
 import { useLogin } from "../hooks/useFetch";
 
@@ -16,7 +17,9 @@ const Home = () => {
 
   const itemsPerPage = 5;
 
-  if (loading) return <div className="flex justify-center">Loading....</div>;
+  if (loading) return <div className="flex justify-center items-center min-h-screen">
+    <img src={loading_image} alt="" className="w-20 md:w-30"/>
+  </div>;
   if (error) return <div className="flex justify-center">{error.message}</div>;
 
   const totalPages = Math.ceil(data?.articles.length / itemsPerPage); // ចំនួនផេក
