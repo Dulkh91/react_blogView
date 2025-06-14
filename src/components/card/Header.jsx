@@ -46,7 +46,9 @@ const Header = ({ titleData, onRefech }) => {
     onRefech();
   };
 
-  const throttleFavorited = useThrottleCallback(()=>{handleFavorite()} ,800 )
+  const throttleFavorited = useThrottleCallback(() => {
+    handleFavorite();
+  }, 800);
 
   return (
     <div className="flex items-center">

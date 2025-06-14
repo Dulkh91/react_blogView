@@ -1,4 +1,4 @@
-import { useRef, useCallback } from 'react';
+import { useRef, useCallback } from "react";
 
 const useThrottleCallback = (callback, delay = 1000) => {
   const isThrottled = useRef(false);
@@ -28,7 +28,7 @@ const useThrottleCallback = (callback, delay = 1000) => {
         throw err;
       }
     },
-    [callback, delay]
+    [callback, delay],
   );
 
   return throttledFn;
