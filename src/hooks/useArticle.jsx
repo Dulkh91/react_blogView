@@ -34,10 +34,8 @@ const useArticle = () => {
       tagList: article.tagList.map((tag) => tag.trim()).filter(Boolean),
     };
 
-    // console.log(cleanArticle);
+
     try {
-      // console.log(Array.isArray(article.tagList))
-      // console.log(article)
       const response = await fetch(`${API_URL}/articles/${slug}`, {
         method: "PUT",
         headers: {
@@ -49,7 +47,6 @@ const useArticle = () => {
 
       if (!response.ok) throw new Error("Update failed");
       const data = await response.json();
-      // console.log(data);
       return data.article;
     } catch (error) {
       setErrors(error.message);

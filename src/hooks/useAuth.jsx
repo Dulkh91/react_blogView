@@ -62,8 +62,6 @@ const useAuth = () => {
 
       if (!response.ok) throw new Error("Email and Password failed login");
 
-      // console.log("logging: ", data)
-
       localStorage.setItem("authToken", data.user.token);
       setIsLoging(true);
       setUser(data.user);
@@ -121,7 +119,6 @@ const useAuth = () => {
 
       if (!response.ok) throw new Error("Update profile is failed");
       const result = await response.json();
-      // console.log(result);
       setUser(result.user);
       return result.user;
     } catch (error) {

@@ -1,6 +1,5 @@
 import imageDefault from "../../assets/imageDefault.png";
 const Profile = ({ dataProfile }) => {
-  // console.log(image)
 
   return (
     <div className="flex items-center gap-2">

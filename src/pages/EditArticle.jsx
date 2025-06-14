@@ -51,7 +51,6 @@ const EditArticle = () => {
 
   const onSubmit = async (data) => {
     try {
-      // console.log(data.article)
       await updateArticle(slug, data.article, user?.token);
       navi("/articles");
     } catch (error) {

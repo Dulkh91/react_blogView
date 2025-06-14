@@ -9,8 +9,8 @@ const Home = () => {
   const { data, loading, error, refecth } = useFetchData("articles");
 
   //ដោយសារ ទិន្ន័យមានបញ្ហាដែល slug មានទទេ គឺខូចទិន្ន័យដែលមិនអាចប្រើបាន
-  const clearData = data?.articles.filter(d=>d.slug)
-  
+  const clearData = data?.articles.filter((d) => d.slug);
+
   //  const [currentPage, setCurrentPage] = useState(1);
 
   const [searchParams, setSearchParams] = useSearchParams();
@@ -28,15 +28,11 @@ const Home = () => {
 
   const totalPages = Math.ceil(clearData.length / itemsPerPage); // ចំនួនផេក
   const startIndex = (currentPage - 1) * itemsPerPage; // ចាប់ផ្តើមពី ០
-  const currentItems = clearData.slice(
-    startIndex,
-    startIndex + itemsPerPage,
-  ); // ទិន្ន័យមួយម្តងៗ
+  const currentItems = clearData.slice(startIndex, startIndex + itemsPerPage); // ទិន្ន័យមួយម្តងៗ
 
   const handleCurrentPage = (page) => {
     setSearchParams({ page });
   };
-
 
   return (
     <div className="min-h-screen flex flex-col ">

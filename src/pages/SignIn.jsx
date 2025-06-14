@@ -19,8 +19,7 @@ const Login = () => {
     } catch (error) {
       setFormErrors(error);
     }
-
-    // console.log(formErrors);
+    
   };
 
   if (isLoging) return <Navigate to={`/`} replace />;

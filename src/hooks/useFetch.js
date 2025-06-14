@@ -17,9 +17,8 @@ export const useFetchData = (slug) => {
 
       if (!response.ok) throw new Error("មានបញ្ហាក្នុងការទាញទិន្នន័យ");
       const result = await response.json();
-    
-      setData(result );
-     
+
+      setData(result);
     } catch (error) {
       setError(error.message);
     } finally {
