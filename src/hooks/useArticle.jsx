@@ -34,7 +34,7 @@ const useArticle = () => {
       tagList: article.tagList.map((tag) => tag.trim()).filter(Boolean),
     };
 
-    console.log(cleanArticle);
+    // console.log(cleanArticle);
     try {
       // console.log(Array.isArray(article.tagList))
       // console.log(article)
@@ -49,7 +49,7 @@ const useArticle = () => {
 
       if (!response.ok) throw new Error("Update failed");
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
       return data.article;
     } catch (error) {
       setErrors(error.message);

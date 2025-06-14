@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import useArticle from "../../hooks/useArticle";
 import { useAuthContext } from "../../context/AuthContext";
+import useThrottleCallback from "../../hooks/useThrottle";
 
 const Header = ({ titleData, onRefech }) => {
   const { user, isLoging } = useAuthContext();
@@ -45,6 +46,8 @@ const Header = ({ titleData, onRefech }) => {
     onRefech();
   };
 
+  const throttleFavorited = useThrottleCallback(()=>{handleFavorite()} ,800 )
+
   return (
     <div className="flex items-center">
       <Link to={`/articles/${titleData.slug}`}>
@@ -54,7 +57,7 @@ const Header = ({ titleData, onRefech }) => {
       </Link>
       <div className="ml-3 flex items-center gap-1">
         <button
-          onClick={handleFavorite}
+          onClick={throttleFavorited}
           disabled={!isLoging}
           className={
             isLoging
