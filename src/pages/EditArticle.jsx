@@ -5,12 +5,16 @@ import { useParams, useNavigate, Navigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CencalBTN from "../components/CencalBTN";
 import ModalClose from "../modal/ModalClose";
+import { useFetchData } from "../hooks/useFetch";
+import slugify from "../utility/slugly";
+import useDebounce from "../hooks/useDebounce";
 
 const EditArticle = () => {
   const navi = useNavigate();
   const { updateArticle } = useArticle();
   const { slug } = useParams(); // Get slug for edit article
   const [isModelOpen, setIsModelOpen] = useState(false);
+  const [isDuplicated, setIsDuplicated] = useState(false);
 
   const { user, isLoging } = useAuthContext();
 
@@ -56,9 +60,24 @@ const EditArticle = () => {
   };
 
   //ធ្វើ delage input ថាមានទិន្ន័យទេ?
-  const watchTitle = watch("article.title").length;
+  const watchTitle = watch("article.title");
   const watchBody = watch("article.body").length;
-  const watchInput = Boolean(watchTitle || watchBody);
+  const watchInput = Boolean(watchTitle.length || watchBody);
+
+  //process compare data & input
+  // call debounce
+  const debounceQuery = useDebounce(watchTitle.toLocaleLowerCase(), 500);
+  const { data } = useFetchData("articles");
+
+  useEffect(() => {
+    if (!data?.articles || !debounceQuery) return;
+    //Input  វាដូចនៅ database និងត្រូវខុសពី slug url
+    const match = data?.articles.some(
+      (article) =>
+        article.slug === slugify(debounceQuery) && article.slug !== slug,
+    );
+    setIsDuplicated(match);
+  }, [debounceQuery, data]);
 
   // Handle Navigage page when user create new_article without login
   if (!isLoging) {
@@ -70,10 +89,16 @@ const EditArticle = () => {
       <div className="bg-white relative mt-5 max-w-3xl mx-auto p-5 rounded-sm shadow-lg space-y-5 ">
         <h1 className="text-center">Edit article</h1>
 
-        <form method="post" onSubmit={handleSubmit(onSubmit)}>
+        <form
+          method="post"
+          onSubmit={handleSubmit(onSubmit)}
+          className=" space-y-3"
+        >
           {/* Title field */}
           <div>
-            <label htmlFor="title">Title</label>
+            <label htmlFor="title" className=" text-gray-500">
+              Title
+            </label>
             <input
               type="text"
               name="title"
@@ -82,11 +107,16 @@ const EditArticle = () => {
               {...register("article.title")}
               autoFocus
             />
+            {isDuplicated && (
+              <label className="valid_text">{`The title '${watchTitle}' exit in database`}</label>
+            )}
           </div>
 
           {/* Description field */}
           <div>
-            <label htmlFor="description">Short description</label>
+            <label htmlFor="description" className=" text-gray-500">
+              Short description
+            </label>
             <input
               type="text"
               name="description"
@@ -98,7 +128,9 @@ const EditArticle = () => {
 
           {/* Body field */}
           <div>
-            <label htmlFor="text">Text</label>
+            <label htmlFor="text" className=" text-gray-500">
+              Text
+            </label>
             <textarea
               rows={5}
               className="block border border-gray-400 p-2.5 w-full text-sm rounded-sm"
@@ -163,7 +195,9 @@ const EditArticle = () => {
             </button>
           )}
           {/* updata button */}
-          <button className="bg-blue-500 px-20 p-1 rounded-sm text-white mt-5 select-none">
+          <button
+            className={`bg-blue-500 px-20 p-1 rounded-sm text-white mt-5 select-none ${isDuplicated && "pointer-events-none opacity-35"}`}
+          >
             Update
           </button>
         </form>

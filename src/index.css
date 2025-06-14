@@ -11,4 +11,7 @@ body {
   .valid_input {
     @apply border-red-500! outline-0! outline-red-500!;
   }
+  .valid_text {
+    @apply text-red-500! text-xs md:text-sm font-light;
+  }
 }

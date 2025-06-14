@@ -43,7 +43,6 @@ export const CreateUserAction = async ({ request }) => {
       //   }),
     });
     if (!response.ok) return errors;
-    console.log(response.json());
     return redirect("/sign_up");
   } catch (error) {
     return error;
